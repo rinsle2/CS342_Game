@@ -6,6 +6,11 @@ public class Direction {
     private Place end;
     private String direction;
     private boolean locked;
+    //Scanner Constructor
+    public Direction(Scanner sc) {
+
+    }
+    //Default Contructor
     public Direction(int ID, Place from, Place to, String dir){
         dirID = ID;
         begin = from;
@@ -41,8 +46,8 @@ public class Direction {
         return this.locked;
     }
     //follow the direction(shows next room if unlocked, same room otherwise)
-    public Place follow() {
-        if (!this.direction.contains("L"))
+    public Place followDirection() {
+        if (!this.isLocked())
         {
             return this.end;
         }
