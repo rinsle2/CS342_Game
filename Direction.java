@@ -87,6 +87,10 @@ public class Direction {
         }
         return this.begin;
     }
+    //Use an Artifact
+    public void useItem(Artifact a) {
+        if(a.value()>0 && a.value() == this.lockPattern);
+    }
     /*Beta code: Print out the direction*/
     public void print() {
         System.out.println("Direction information:\n"  + this.dirID + "\n" + this.direction.toString() + "\n" + this.begin.getName() + "\n" + this.end.getName() + "\n" + this.locked);
