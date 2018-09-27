@@ -45,7 +45,7 @@ public class Place {
         for(Direction d : this.directions)
         {
             if(d.match(dir))
-                return d.follow();
+                return d.followDirection();
         }
         return this;
     }
@@ -54,6 +54,6 @@ public class Place {
         System.out.println("Place Description:" + this.description);
         System.out.println("Place Name:" + this.name);
         for(Direction d : this.directions)
-        System.out.println("Direction ID: " + d.getdirID() + "\nDirection: " + d.getDir());
+        System.out.println("Direction ID: " + d.getDirID() + "\nDirection: " + d.getDir());
     }
 }

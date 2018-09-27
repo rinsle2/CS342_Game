@@ -1,28 +1,20 @@
 //Ryan Insley rinsle2
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.TreeMap;
 
 public class Game {
     //Variables
     private String gameName;
-    private ArrayList<Place> places;
+    private TreeMap<Integer, Place> places;
     private Place curPlace;
     //Constructor
     public Game(Scanner fin) {
-        
-    }
-    public Game(String name) {
-        this.gameName = name;
-        this.places = new ArrayList<>();
-    }
+        this.places = new TreeMap<>();
 
-    public void addPlace(Place p)
-    {
-        this.places.add(p);
     }
 
     public void play() {
-        mapSetup();
         //Welcome the user
         System.out.println("Welcome to " + this.gameName);
         //Start in the Entrance Hall.
