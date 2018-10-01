@@ -44,17 +44,21 @@ public class Direction {
     }
     //Scanner Constructor
     public Direction(Scanner sc) {
+        if(sc.nextLine().length()==0 || sc.nextLine().startsWith("//") || sc.nextLine().startsWith("/*")) {
+            return;
+        }
+        this.dirID = sc.nextInt();
+        this.begin = Place.getPlaceFromId(sc.nextInt());
+        this.direction = DirType.valueOf(sc.next());
+        this.end = Place.getPlaceFromId(sc.nextInt());
+        this.lockPattern = sc.nextInt();
 
     }
-    //Default Contructor
-    public Direction(int ID, Place from, Place to, int lP, String dir){
-        dirID = ID;
-        begin = from;
-        end = to;
-        direction = DirType.valueOf(dir);
-        lockPattern = lP;
-        locked = false;
+    private String skip(String s) {
+        s = s.substring(0, s.indexOf("//"));
+        return s;
     }
+    //Default Contructor
     //getters
     public int getDirID() {
         return this.dirID;

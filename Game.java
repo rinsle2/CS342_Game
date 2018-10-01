@@ -1,18 +1,31 @@
 //Ryan Insley rinsle2
 import java.util.Scanner;
 import java.util.ArrayList;
-import java.util.TreeMap;
+import java.util.Vector;
+import java.util.regex.*;
 
 public class Game {
     //Variables
     private String gameName;
-    private TreeMap<Integer, Place> places;
+    private ArrayList<Place> places;
     private Place curPlace;
     //Constructor
     public Game(Scanner fin) {
-        this.places = new TreeMap<>();
-
+        places = new ArrayList<>();
+        while(fin.hasNextLine()) {
+            String cur = fin.nextLine();
+            if(cur.length()==0 || cur.startsWith("//") || cur.startsWith("/*")) {
+                continue;
+            }
+            if (fin.nextLine().contains("PLACES")) {
+                int index = fin.nextInt();
+                for (int i = 0; i < index; i++) {
+                    places.add(new Place(fin));
+                }
+            }
+        }
     }
+
 
     public void play() {
         //Welcome the user

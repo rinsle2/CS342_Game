@@ -10,11 +10,13 @@ public class GameTester {
         //Print Name and netid
         System.out.println("Ryan Insley\nrinsle2\nrinsley\n\n\n\n");
         //Ask user for game name
-        Scanner sc = new Scanner(System.in);
+        Scanner sc = new Scanner("MystiCity 3.1.gdf");
         System.out.print("Game name is: ");
-        game = sc.next();
+        String s = sc.nextLine();
+        game = s.substring(8, s.indexOf("//"));
+        sc.nextLine();
         //Create game
-        g = new Game(game);
+        g = new Game(sc);
         //Add all the places and directions
         g.play();
     }
