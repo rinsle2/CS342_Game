@@ -14,9 +14,6 @@ public class Place {
     private ArrayList<Artifact> artifacts;
     //Constructor
     public Place(Scanner sc) {
-        if(sc.nextLine().length()==0 || sc.nextLine().startsWith("//") || sc.nextLine().startsWith("/*")) {
-            return;
-        }
         String description = "";
         Integer id;
         String pName;
@@ -30,8 +27,12 @@ public class Place {
         this.name= pName;
         this.description = description;
         this.directions = new ArrayList<>();
+        this.artifacts = new ArrayList<>();
     }
 
+    public void addArtifact(Artifact a) {
+        this.artifacts.add(a);
+    }
     private String skip(String s) {
         s = s.substring(0, s.indexOf("//"));
         return s;

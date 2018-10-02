@@ -44,14 +44,17 @@ public class Direction {
     }
     //Scanner Constructor
     public Direction(Scanner sc) {
-        if(sc.nextLine().length()==0 || sc.nextLine().startsWith("//") || sc.nextLine().startsWith("/*")) {
-            return;
-        }
         this.dirID = sc.nextInt();
         this.begin = Place.getPlaceFromId(sc.nextInt());
         this.direction = DirType.valueOf(sc.next());
         this.end = Place.getPlaceFromId(sc.nextInt());
         this.lockPattern = sc.nextInt();
+        if(lockPattern != 0) {
+            this.locked = true;
+        }
+        else {
+            this.locked = false;
+        }
 
     }
     private String skip(String s) {
