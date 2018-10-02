@@ -13,10 +13,12 @@ public class Game {
     //Variables
     private String gameName;
     private ArrayList<Place> places;
+    private ArrayList<Artifact> inventory;
     private Place curPlace;
     //Constructor
     public Game(Scanner fin) {
         places = new ArrayList<>();
+        inventory = new ArrayList<>();
         while(fin.hasNextLine()) {
             String cur = fin.nextLine();
             if(cur.length()==0 || cur.startsWith("//") || cur.startsWith("/*")) {
@@ -55,7 +57,6 @@ public class Game {
     }
     public void play() {
         //Welcome the user
-        System.out.println("Welcome to " + this.gameName);
         //Start in the Entrance Hall.
         curPlace = places.get(0);
         //Set up the input reader
@@ -65,7 +66,7 @@ public class Game {
         String dir = sc.nextLine();
         while(!curPlace.identification().equals("Exit") || dir.equalsIgnoreCase("QUIT") || dir.equalsIgnoreCase("EXIT"))
         {
-
+            checkInput(dir);
             Place next = curPlace.followDirection(dir);
             if(!curPlace.equals(next)) {
                 curPlace = next;
@@ -79,5 +80,10 @@ public class Game {
         sc.close();
         System.out.println("Thank you for playing");
         return;
+    }
+    public void checkInput(String str) {
+        String get = "get";
+        String use = "use";
+        String inv = " inve";
     }
 }

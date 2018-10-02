@@ -7,17 +7,22 @@ public class GameTester {
         //Variables needed
         Game g;
         String game;
+        String filename = args[1];
         //Print Name and netid
         System.out.println("Ryan Insley\nrinsle2\nrinsley\n\n\n\n");
-        //Ask user for game name
-        Scanner sc = new Scanner("MystiCity 3.1.gdf");
-        System.out.print("Game name is: ");
-        String s = sc.nextLine();
-        game = s.substring(8, s.indexOf("//"));
+        //Grab the game file
+        Scanner sc = new Scanner(filename);
+        String s = sc.next();
+        System.out.println("Filetype is: " + s);
+        s = sc.next();
+        System.out.println("Version is: " + s);
+        game = sc.next();
+        System.out.println(game);
         sc.nextLine();
         //Create game
         g = new Game(sc);
-        //Add all the places and directions
+        sc.close();
+        //Start the game
         g.play();
     }
 }

@@ -33,6 +33,9 @@ public class Place {
     public void addArtifact(Artifact a) {
         this.artifacts.add(a);
     }
+    public void addPlacetoMap() {
+        places.put(placeID, this);
+    }
     private String skip(String s) {
         s = s.substring(0, s.indexOf("//"));
         return s;

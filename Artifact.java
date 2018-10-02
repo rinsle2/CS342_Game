@@ -14,7 +14,7 @@ public class Artifact {
         this.val = scanner.nextInt();
         this.mobility = scanner.nextInt();
         this.keyPattern = scanner.nextInt();
-        this.name = scanner.next();
+        this.name = skip(scanner.next());
         int index = scanner.nextInt();
         String d = "";
         for(int i = 0;i<index;i++) {
@@ -22,6 +22,10 @@ public class Artifact {
         }
         this.description = d;
 
+    }
+    private String skip(String s) {
+        s = s.substring(0, s.indexOf("//"));
+        return s;
     }
     //Get the value
     public int value() {
