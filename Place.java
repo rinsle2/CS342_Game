@@ -41,12 +41,6 @@ public class Place {
         s = s.substring(0, s.indexOf("//"));
         return s;
     }
-    public Place(int ID, String n, String d){
-        this.placeID = ID;
-        this.description = d;
-        this.name = n;
-        this.directions = new ArrayList<>();
-    }
     //Manipulation
     public String identification() {
         return this.name;

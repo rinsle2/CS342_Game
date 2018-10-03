@@ -97,6 +97,7 @@ public class Game {
             System.out.println("No such item exists in this room.");
             return true;
         }
+        //Using an item
         else if(str.startsWith(use)) {
             str = str.substring(4);
             Artifact a = getArtifactByName(str);
@@ -107,17 +108,20 @@ public class Game {
             System.out.println("You don't have that item");
             return true;
         }
+        //checking the inventory
         else if(str.startsWith(inv)) {
             for(Artifact a : inventory) {
                 a.display();
             }
             return true;
         }
+        //drop an item
         else if(str.startsWith(drop)) {
             str = str.substring(5);
             drop(str);
             return true;
         }
+        //Moving places
         else if(str.startsWith("go")) {
             str = str.substring(3);
             move(str);
@@ -127,9 +131,11 @@ public class Game {
             return false;
         }
     }
-
+    //Move places
     private void move(String str) {
+        //find the next place
         Place next = curPlace.followDirection(str);
+        //move places(if you can)
         if(!curPlace.equals(next)) {
             curPlace = next;
         }
@@ -139,11 +145,16 @@ public class Game {
         curPlace.display();
 
     }
+    //Get an item from a place
     private void get(Artifact a) {
-        curPlace.removeArtifact(a);
-        inventory.add(a);
+        if(a.size() > 0){
+           curPlace.removeArtifact(a);
+           inventory.add(a);
+           return;
+        }
+        System.out.println("It's bolted down, your hands hurt a bit from trying to lift it.");
     }
-
+    //Use an item
     private void use(Artifact a) {
         curPlace.useArtifact(a);
     }
