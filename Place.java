@@ -28,13 +28,14 @@ public class Place {
         this.description = description;
         this.directions = new ArrayList<>();
         this.artifacts = new ArrayList<>();
+        this.addPlacetoMap();
     }
 
     public void addArtifact(Artifact a) {
         this.artifacts.add(a);
     }
-    public void addPlacetoMap() {
-        places.put(placeID, this);
+    public  void addPlacetoMap() {
+        Place.places.put(placeID, this);
     }
     private String skip(String s) {
         s = s.substring(0, s.indexOf("//"));
@@ -55,10 +56,24 @@ public class Place {
         System.out.print("You are in the ");
         this.name();
         this.description();
-        System.out.println();
+        System.out.println("Artifacts in this room are: ");
+        for(Artifact art : artifacts) {
+            art.display();
+        }
         System.out.println();
         System.out.print("Give me a direction to go please: ");
     }
+
+    public Artifact getArtifactByName(String string) {
+        for(Artifact a : artifacts) {
+            if(a.name().equalsIgnoreCase(string)) {
+                return a;
+            }
+        }
+        return null;
+
+    }
+
     public String getName() {
         return this.name;
     }
@@ -85,7 +100,20 @@ public class Place {
         }
         return this;
     }
+    public void removeArtifact(Artifact a) {
+        int index = artifacts.indexOf(a);
+        artifacts.remove(index);
+    }
 
+    public void useArtifact(Artifact a) {
+        for(Direction d : directions) {
+            if(a.getKeyPattern() == d.getLockPattern()  || a.getKeyPattern() < 0) {
+                d.unlock();
+                return;
+            }
+        }
+        System.out.println("Nothing to unlock.");
+    }
 
     public void print() {
         System.out.println("Place ID:" + this.placeID);
@@ -93,5 +121,7 @@ public class Place {
         System.out.println("Place Name:" + this.name);
         for(Direction d : this.directions)
         System.out.println("Direction ID: " + d.getDirID() + "\nDirection: " + d.getDir());
+        for(Artifact a : this.artifacts)
+            a.display();
     }
 }

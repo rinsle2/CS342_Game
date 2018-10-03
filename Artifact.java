@@ -43,6 +43,10 @@ public class Artifact {
     public String description() {
         return this.description;
     }
+    public void display() {
+        System.out.println(this.name());
+        System.out.println(this.description());
+    }
     public int getKeyPattern() { return this.keyPattern; }
     /*print everything*/
     public void print() {

@@ -61,7 +61,6 @@ public class Direction {
         s = s.substring(0, s.indexOf("//"));
         return s;
     }
-    //Default Contructor
     //getters
     public int getDirID() {
         return this.dirID;
@@ -82,6 +81,12 @@ public class Direction {
     {
         this.locked = false;
     }
+    //get the keyPattern
+
+    public int getLockPattern() {
+        return lockPattern;
+    }
+
     //check if locked
     public boolean isLocked() {
         return this.locked;
