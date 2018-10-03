@@ -43,6 +43,7 @@ public class Artifact {
     private String description() {
         return this.description;
     }
+    public Place getLocation() { return this.location;}
     //Display the artifact items
     public void display() {
         System.out.println(this.name());

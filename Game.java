@@ -48,9 +48,8 @@ public class Game {
                     }
                 }
                 else {
-                    for(Place p : places) {
-                        p.addArtifact(new Artifact(sc));
-                    }
+                    Artifact a = new Artifact(sc);
+                    a.getLocation().addArtifact(a);
                 }
             }
         }
