@@ -13,20 +13,20 @@ public class Direction {
         NONE("",""),
         N("North", "N"),
         NE("Northeast", "NE"),
-        NNE("North-Northeast", "NNE"),
+        NNE("North byNortheast", "NNE"),
         NW("Northwest", "NW"),
-        NNW("North-Northwest","NNW"),
+        NNW("North by Northwest","NNW"),
         E("East","E"),
-        ENE("East-Northeast","ENE"),
-        ESE("East-Southeast","ESE"),
+        ENE("East by Northeast","ENE"),
+        ESE("East by Southeast","ESE"),
         W("West","W"),
-        WNW("West-Northwest","WNW"),
-        WSW("West-Southwest","WSW"),
+        WNW("West by Northwest","WNW"),
+        WSW("West by Southwest","WSW"),
         S("South","S"),
         SE("Southeast","SE"),
-        SSE("South-Southeast","SSE"),
+        SSE("South by Southeast","SSE"),
         SW("Southwest","SW"),
-        SSW("South-Southwest","SSW");
+        SSW("South by Southwest","SSW");
 
         private String text;
         private String abbr;
@@ -49,31 +49,27 @@ public class Direction {
         this.direction = DirType.valueOf(sc.next());
         this.end = Place.getPlaceFromId(sc.nextInt());
         this.lockPattern = sc.nextInt();
-        if(lockPattern != 0) {
-            this.locked = true;
+        //Check the lock Pattern
+        if(lockPattern!= 0) {
+            this.lock();
         }
         else {
-            this.locked = false;
+            this.unlock();
         }
-
     }
-    private String skip(String s) {
-        s = s.substring(0, s.indexOf("//"));
-        return s;
-    }
-    //getters
+    //getters(you will never see these)
     public int getDirID() {
         return this.dirID;
     }
     public String getDir() {
-        return this.direction.toString();
+        return this.direction.text;
     }
     //Match the Direction with the user input
     public boolean match(String dir){
-        return this.direction.match(dir);
+        return (this.direction.text.equalsIgnoreCase(dir) || this.direction.abbr.equalsIgnoreCase(dir));
     }
-    //lock the Direction
-    public void lock()
+    //lock or unlock the Direction
+    private void lock()
     {
         this.locked=true;
     }
@@ -88,7 +84,7 @@ public class Direction {
     }
 
     //check if locked
-    public boolean isLocked() {
+    private boolean isLocked() {
         return this.locked;
     }
     //follow the direction(shows next room if unlocked, same room otherwise)
@@ -98,10 +94,6 @@ public class Direction {
             return this.end;
         }
         return this.begin;
-    }
-    //Use an Artifact
-    public void useItem(Artifact a) {
-        if(a.value()>0 && a.value() == this.lockPattern);
     }
     /*Beta code: Print out the direction*/
     public void print() {

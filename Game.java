@@ -6,12 +6,9 @@
 */
 import java.util.Scanner;
 import java.util.ArrayList;
-import java.util.Vector;
-import java.util.regex.*;
 
 public class Game {
     //Variables
-    private String gameName;
     private ArrayList<Place> places;
     private ArrayList<Artifact> inventory;
     private Place curPlace;
@@ -33,12 +30,15 @@ public class Game {
     }
     //Function for adding all of the items(less copying fo code)
     private void initItem(Scanner sc, String whatToLookFor, String current) {
-        if (sc.nextLine().contains(whatToLookFor)) {
+        //If the string contains what you need, enter the loop
+        if (current.contains(whatToLookFor)) {
             int index = sc.nextInt();
             for (int i = 0; i < index; i++) {
+                //Check for empty lines/Full line comments
                 if(current.length()==0 || current.startsWith("//") || current.startsWith("/*")) {
                     continue;
                 }
+                //Check what item you need and initialize accordingly
                 if(whatToLookFor.equalsIgnoreCase("places")) {
                     places.add(new Place(sc));
                 }
@@ -55,8 +55,8 @@ public class Game {
             }
         }
     }
+    //Play the game
     public void play() {
-        //Welcome the user
         //Start in the Entrance Hall.
         curPlace = places.get(0);
         //Set up the input reader
@@ -66,22 +66,27 @@ public class Game {
         String dir = sc.nextLine();
         while(!curPlace.identification().equals("Exit") || dir.equalsIgnoreCase("QUIT") || dir.equalsIgnoreCase("EXIT"))
         {
+            //check the string
+            boolean realString = dir.length() > 0;
             boolean check = checkInput(dir);
-            if(!check) {
+            //when legit string, and no other chars in string
+            if(!check && realString) {
                 move(dir);
             }
             dir = sc.nextLine();
         }
         sc.close();
         System.out.println("Thank you for playing");
-        return;
     }
-    public boolean checkInput(String str) {
+    //Input checker
+    private boolean checkInput(String str) {
+        //Input to check for
         String get = "get";
         String drop = "drop";
         String use = "use";
         String inv = " inve";
-        str.toLowerCase();
+        str = str.toLowerCase();
+        //Check if it's that string
         if(str.startsWith(get)) {
             str = str.substring(4);
             Artifact a = curPlace.getArtifactByName(str);
@@ -89,10 +94,8 @@ public class Game {
                 get(a);
                 return true;
             }
-            else {
-                System.out.println("No such item exists in this room.");
-                return true;
-            }
+            System.out.println("No such item exists in this room.");
+            return true;
         }
         else if(str.startsWith(use)) {
             str = str.substring(4);
@@ -101,10 +104,8 @@ public class Game {
                 use(a);
                 return true;
             }
-            else {
-                System.out.println("You don't have that item");
-                return true;
-            }
+            System.out.println("You don't have that item");
+            return true;
         }
         else if(str.startsWith(inv)) {
             for(Artifact a : inventory) {
@@ -127,7 +128,7 @@ public class Game {
         }
     }
 
-    public void move(String str) {
+    private void move(String str) {
         Place next = curPlace.followDirection(str);
         if(!curPlace.equals(next)) {
             curPlace = next;
@@ -138,16 +139,16 @@ public class Game {
         curPlace.display();
 
     }
-    public void get(Artifact a) {
+    private void get(Artifact a) {
         curPlace.removeArtifact(a);
         inventory.add(a);
     }
 
-    public void use(Artifact a) {
+    private void use(Artifact a) {
         curPlace.useArtifact(a);
     }
 
-    public void drop(String str) {
+    private void drop(String str) {
         for(Artifact a : inventory) {
             if(a.name().equalsIgnoreCase(str)) {
                 inventory.remove(a);
@@ -156,7 +157,7 @@ public class Game {
         }
         System.out.println("You don't have that item.");
     }
-    public Artifact getArtifactByName(String string) {
+    private Artifact getArtifactByName(String string) {
         for(Artifact a : inventory) {
             if(a.name().equalsIgnoreCase(string)) {
                 return a;

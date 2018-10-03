@@ -21,8 +21,8 @@ public class Artifact {
             d += scanner.nextLine();
         }
         this.description = d;
-
     }
+    //Skip the comments at the end
     private String skip(String s) {
         s = s.substring(0, s.indexOf("//"));
         return s;
@@ -40,9 +40,10 @@ public class Artifact {
         return this.name;
     }
     //Get the description
-    public String description() {
+    private String description() {
         return this.description;
     }
+    //Display the artifact items
     public void display() {
         System.out.println(this.name());
         System.out.println(this.description());
@@ -50,6 +51,6 @@ public class Artifact {
     public int getKeyPattern() { return this.keyPattern; }
     /*print everything*/
     public void print() {
-        System.out.println("Artifact: " + this.name + "\nDescription: " +this.description+ "\nValue: " +this.val+"\nMobility: " + this.mobility);
+        System.out.println("Artifact: " + this.name + "\nDescription: " +this.description+ "\nValue: " +this.val+"\nMobility: " + this.mobility + "\nID: " + this.artifactID +"\nLocation: "+ this.location);
     }
 }

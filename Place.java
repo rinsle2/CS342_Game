@@ -9,7 +9,7 @@ public class Place {
     private Integer placeID;
     private String name;
     private String description;
-    static private TreeMap<Integer, Place> places = new TreeMap<Integer, Place>();
+    static private TreeMap<Integer, Place> places = new TreeMap<>();
     private ArrayList<Direction> directions;
     private ArrayList<Artifact> artifacts;
     //Constructor
@@ -34,7 +34,7 @@ public class Place {
     public void addArtifact(Artifact a) {
         this.artifacts.add(a);
     }
-    public  void addPlacetoMap() {
+    private  void addPlacetoMap() {
         Place.places.put(placeID, this);
     }
     private String skip(String s) {
@@ -77,10 +77,10 @@ public class Place {
     public String getName() {
         return this.name;
     }
-    public void name() {
+    private void name() {
         System.out.println(this.name);
     }
-    public void description() {
+    private void description() {
         System.out.println(this.description);
     }
     //Add a Direction to the vector of directions
@@ -101,8 +101,7 @@ public class Place {
         return this;
     }
     public void removeArtifact(Artifact a) {
-        int index = artifacts.indexOf(a);
-        artifacts.remove(index);
+        artifacts.remove(a);
     }
 
     public void useArtifact(Artifact a) {
