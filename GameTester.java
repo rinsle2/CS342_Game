@@ -13,14 +13,15 @@ public class GameTester {
         //Grab the game file
         Scanner sc = new Scanner(filename);
         String s = sc.next();
-        System.out.println("Filetype is: " + s);
+        System.out.print("Filetype is: " + s);
         s = sc.next();
-        System.out.println("Version is: " + s);
+        System.out.print("Version is: " + s);
         game = sc.next();
-        System.out.println(game);
+        System.out.println("Welcome to " + game);
         sc.nextLine();
         //Create game
         g = new Game(sc);
+        //close the file
         sc.close();
         //Start the game
         g.play();

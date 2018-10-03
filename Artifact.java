@@ -8,7 +8,7 @@ public class Artifact {
     private int keyPattern;
     private int val;
     private int mobility;
-    Artifact (Scanner scanner) {
+    public Artifact (Scanner scanner) {
         this.location = Place.getPlaceFromId(scanner.nextInt());
         this.artifactID = scanner.nextInt();
         this.val = scanner.nextInt();
