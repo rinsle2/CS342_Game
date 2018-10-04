@@ -109,9 +109,14 @@ public class Game {
         }
         //checking the inventory
         else if(str.startsWith(inv)) {
+            int vals = 0;
+            int mobil = 0;
             for(Artifact a : inventory) {
                 a.display();
+                vals += a.value();
+                mobil += a.size();
             }
+            System.out.println("Total Value: " + vals + "\nTotal Weight: " + mobil);
             return true;
         }
         //drop an item

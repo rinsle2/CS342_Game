@@ -7,7 +7,7 @@ public class GameTester {
         //Variables needed
         Game g;
         String game;
-        String filename = args[1];
+        String filename = args[0];
         //Print Name and netid
         System.out.println("Ryan Insley\nrinsle2\nrinsley\n\n\n\n");
         //Grab the game file
