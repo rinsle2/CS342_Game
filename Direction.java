@@ -43,7 +43,7 @@ public class Direction {
         }
     }
     //Scanner Constructor
-    public Direction(Scanner sc) {
+    public Direction(Scanner sc, float version) {
         this.dirID = sc.nextInt();
         this.begin = Place.getPlaceFromId(sc.nextInt());
         this.direction = DirType.valueOf(sc.next());
@@ -66,7 +66,7 @@ public class Direction {
     }
     //Match the Direction with the user input
     public boolean match(String dir){
-        return (this.direction.text.equalsIgnoreCase(dir) || this.direction.abbr.equalsIgnoreCase(dir));
+        return this.direction.match(dir);
     }
     //lock or unlock the Direction
     private void lock()
@@ -78,11 +78,9 @@ public class Direction {
         this.locked = false;
     }
     //get the keyPattern
-
     public int getLockPattern() {
         return lockPattern;
     }
-
     //check if locked
     private boolean isLocked() {
         return this.locked;

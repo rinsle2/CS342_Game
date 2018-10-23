@@ -2,14 +2,25 @@ import java.util.Scanner;
 
 public class Artifact {
     private Place location;
+    private Character placed;
     private String name;
+
     private String description;
     private int artifactID;
     private int keyPattern;
     private int val;
     private int mobility;
-    public Artifact (Scanner scanner) {
-        this.location = Place.getPlaceFromId(scanner.nextInt());
+    public Artifact (Scanner scanner, float version) {
+        int trueLocation = scanner.nextInt();
+        if(trueLocation > 0) {
+            this.location = Place.getPlaceFromId(trueLocation);
+        }
+        else if(trueLocation < 0) {
+            placed = Character.getCharacterByID(trueLocation = trueLocation *-1);
+        }
+        else{
+            location = Place.getRandomPlace();
+        }
         this.artifactID = scanner.nextInt();
         this.val = scanner.nextInt();
         this.mobility = scanner.nextInt();

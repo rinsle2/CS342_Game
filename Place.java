@@ -1,19 +1,17 @@
 //Ryan Insley, rinsle2
 //Place class, holds all information and manipulation of the places in the game.
-import java.util.ArrayList;
-import java.util.Scanner;
-import java.util.TreeMap;
+import java.util.*;
 
 public class Place {
     //Variables
     private Integer placeID;
     private String name;
     private String description;
-    static private TreeMap<Integer, Place> places = new TreeMap<>();
+    static public TreeMap<Integer, Place> places = new TreeMap<>();
     private ArrayList<Direction> directions;
     private ArrayList<Artifact> artifacts;
     //Constructor
-    public Place(Scanner sc) {
+    public Place(Scanner sc, float version) {
         String description = "";
         Integer id;
         String pName;
@@ -31,10 +29,12 @@ public class Place {
         this.addPlacetoMap();
     }
 
+
+
     public void addArtifact(Artifact a) {
         this.artifacts.add(a);
     }
-    private  void addPlacetoMap() {
+    private void addPlacetoMap() {
         Place.places.put(placeID, this);
     }
     private String skip(String s) {
@@ -42,9 +42,6 @@ public class Place {
         return s;
     }
     //Manipulation
-    public String identification() {
-        return this.name;
-    }
     public void display() {
         
         System.out.print("You are in the ");
@@ -82,6 +79,11 @@ public class Place {
         this.directions.add(d);
     }
 
+    static public Place getRandomPlace() {
+        int high = Place.places.lastKey();
+        Random rand = new Random();
+        return Place.getPlaceFromId(rand.nextInt(high)+1);
+    }
     static public Place getPlaceFromId(Integer id) {
         return Place.places.get(id);
 
@@ -97,7 +99,6 @@ public class Place {
     public void removeArtifact(Artifact a) {
         artifacts.remove(a);
     }
-
     public void useArtifact(Artifact a) {
         for(Direction d : directions) {
             if(a.getKeyPattern() == d.getLockPattern()  || a.getKeyPattern() < 0) {
@@ -107,7 +108,7 @@ public class Place {
         }
         System.out.println("Nothing to unlock.");
     }
-
+    //Debug Code, print everything for one or all places
     public void print() {
         System.out.println("Place ID:" + this.placeID);
         System.out.println("Place Description:" + this.description);
@@ -116,5 +117,10 @@ public class Place {
         System.out.println("Direction ID: " + d.getDirID() + "\nDirection: " + d.getDir());
         for(Artifact a : this.artifacts)
             a.display();
+    }
+    public void printAll() {
+        for(Map.Entry<Integer, Place> p : Place.places.entrySet()) {
+            p.getValue().print();
+        }
     }
 }
