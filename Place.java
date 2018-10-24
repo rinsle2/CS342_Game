@@ -96,10 +96,13 @@ public class Place {
         }
         return this;
     }
+    public ArrayList<Direction> hallways() {
+        return directions;
+    }
     public void removeArtifact(Artifact a) {
         artifacts.remove(a);
     }
-    public void useArtifact(Artifact a) {
+    public void useKey(Artifact a) {
         for(Direction d : directions) {
             if(a.getKeyPattern() == d.getLockPattern()  || a.getKeyPattern() < 0) {
                 d.unlock();

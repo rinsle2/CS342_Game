@@ -6,7 +6,6 @@ public class GameTester {
     public static void main(String[] args) {
         //Variables needed
         Game g;
-        String game;
         String filename;
         int numChar = 1;
         if (args.length >=1) {
@@ -25,7 +24,7 @@ public class GameTester {
         //Grab the game file
         Scanner sc = new Scanner(filename);
         //Create game
-        g = new Game(sc);
+        g = new Game(sc, numChar);
         //close the file
         sc.close();
         //Start the game

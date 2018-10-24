@@ -11,11 +11,13 @@ import java.util.ArrayList;
 public class Game {
     //Variables
     private ArrayList<Character> characters;
+    private int chara;
 
     private float version;
     //Constructor
-    public Game(Scanner fin) {
+    public Game(Scanner fin, int numChar) {
         characters = new ArrayList<>();
+        chara = numChar;
         String s = fin.next();
         System.out.print("Filetype is: " + s);
         version = fin.nextFloat();
@@ -58,12 +60,15 @@ public class Game {
                     }
                 }
                 else if(whatToLookFor.equalsIgnoreCase("characters")) {
+                    if(index < chara) {
+
+                    }
                     if(sc.next().equalsIgnoreCase("player")) {
-                        Character c = new Player(sc, version);
+                        Character c = new Player(sc, version, "player");
                         characters.add(c);
                     }
                     else {
-                        Character c = new NPC(sc, version);
+                        Character c = new NPC(sc, version, "NPC");
                         characters.add(c);
                     }
                 }
@@ -76,9 +81,9 @@ public class Game {
     }
     //Play the game
     public void play() {
-        //Set up the input reader
-        Scanner sc = new Scanner(System.in);
         //Game starts now
-
+        for(Character c : characters) {
+            c.makeMove();
+        }
     }
 }

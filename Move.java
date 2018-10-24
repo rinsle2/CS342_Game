@@ -6,6 +6,7 @@ public class Move {
         USE,
         INVENTORY,
         LOOK,
+        GO,
         DROP;
     }
     Move(String a, String b){

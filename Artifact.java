@@ -4,19 +4,19 @@ public class Artifact {
     private Place location;
     private Character placed;
     private String name;
-
+    private int trueLoc;
     private String description;
     private int artifactID;
     private int keyPattern;
     private int val;
     private int mobility;
     public Artifact (Scanner scanner, float version) {
-        int trueLocation = scanner.nextInt();
-        if(trueLocation > 0) {
-            this.location = Place.getPlaceFromId(trueLocation);
+        trueLoc = scanner.nextInt();
+        if(trueLoc > 0) {
+            this.location = Place.getPlaceFromId(trueLoc);
         }
-        else if(trueLocation < 0) {
-            placed = Character.getCharacterByID(trueLocation = trueLocation *-1);
+        else if(trueLoc < 0) {
+            placed = Character.getCharacterByID(trueLoc *-1);
         }
         else{
             location = Place.getRandomPlace();
@@ -53,6 +53,10 @@ public class Artifact {
     //Get the description
     private String description() {
         return this.description;
+    }
+
+    public void use(Character c, Place p) {
+        c.grabPlace().useKey(this);
     }
     public Place getLocation() { return this.location;}
     //Display the artifact items
