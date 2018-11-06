@@ -30,7 +30,6 @@ public class UI implements DecisionMaker {
             return new Move("inventory", "");
         }
         else {
-            //How did you get here
             return null;
         }
     }
